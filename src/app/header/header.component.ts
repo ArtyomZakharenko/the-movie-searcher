@@ -1,19 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   constructor(
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-  }
 
   onHome() {
     console.log('home');
@@ -21,7 +19,14 @@ export class HeaderComponent implements OnInit {
   }
 
   onFavorites() {
-    console.log('favorites');
     this.router.navigate(['favorites']);
+  }
+
+  onSubmit(form: NgForm) {
+    if (!form.valid) {
+      return;
+    }
+    this.router.navigate(['search'], {queryParams: {q: form.value.q}});
+    form.reset();
   }
 }

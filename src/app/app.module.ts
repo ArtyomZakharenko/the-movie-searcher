@@ -6,18 +6,26 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { MovieCardComponent } from './movies/movie-card/movie-card.component';
+import {HttpClientModule} from "@angular/common/http";
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MoviesListComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    MovieDetailComponent,
+    LoadingSpinnerComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -22,9 +22,27 @@
           <a class="nav-link" (click)="onFavorites()">Favorites</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-light" type="submit">Search</button>
+      <form
+        #searchForm="ngForm"
+        class="d-flex"
+        (ngSubmit)="onSubmit(searchForm)"
+      >
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          ngModel
+          name="search"
+          required
+        >
+        <button
+          class="btn btn-outline-light"
+          type="submit"
+          [disabled]="!searchForm.form.valid"
+        >
+        Search
+        </button>
       </form>
     </div>
   </div>

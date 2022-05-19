@@ -5,7 +5,8 @@ import {MoviesListComponent} from "./movies/movies-list/movies-list.component";
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: MoviesListComponent },
-  { path: 'favorites', component: MoviesListComponent }
+  { path: 'favorites', component: MoviesListComponent },
+  { path: 'search', component: MoviesListComponent }
 ];
 
 @NgModule({

@@ -1,7 +1,20 @@
-<div class="container">
-  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 m-3">
-    <div *ngFor="let movie of movies" class="col mb-4">
-      <app-movie-card></app-movie-card>
+<ng-container [ngSwitch]="(status$ | async)">
+
+  <ng-container *ngSwitchCase="0">
+    <app-loading-spinner></app-loading-spinner>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="1">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 m-3">
+        <div *ngFor="let movie of (value$ | async).results" class="col mb-4">
+          <app-movie-card
+            [movie]="movie"
+          ></app-movie-card>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+  </ng-container>
+
+</ng-container>
+

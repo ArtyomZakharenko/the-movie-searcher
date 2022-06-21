@@ -12,6 +12,7 @@
         Rating: {{movie.rating}}<br>
         Vote count: {{movie.voteCount}}<br>
       </p>
-    <a href="#" class="btn btn-primary">Details</a>
+    <a [routerLink]="['/movie', movie.id]"
+      class="btn btn-primary">Details</a>
   </div>
 </div>

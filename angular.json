@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "TheMovieSearcher"
+  "defaultProject": "TheMovieSearcher",
+  "cli": {
+    "analytics": false
+  }
 }

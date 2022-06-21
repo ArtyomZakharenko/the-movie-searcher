@@ -1,1 +1,102 @@
-<p>movie-detail works!</p>
+<ng-container [ngSwitch]="(detailStatus$ | async)">
+
+  <ng-container *ngSwitchCase="0">
+    <app-loading-spinner></app-loading-spinner>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="1">
+    <div class="container mt-3">
+      <h1 class="d-flex justify-content-center">
+        {{(detailValue$ | async).title}}
+        ({{(detailValue$ | async).releaseDate | date: 'yyyy'}})
+        <a
+          class="link-dark ms-1"
+          [href]="(detailValue$ | async).homepage">
+          <fa-icon
+            class="fs-4"
+            [icon]="faLink"
+          >
+          </fa-icon>
+        </a>
+      </h1>
+      <div class="row mt-3">
+        <div class="col-12 col-md-6 col-lg-5">
+          <img
+            class="img-fluid"
+            [src]="(detailValue$ | async).posterPath"
+            [alt]="(detailValue$ | async).title"
+          >
+        </div>
+        <div class="col-12 col-md-6 col-lg-7">
+        <span class="d-inline-block p-2 bg-primary text-white me-1"
+              *ngFor="let genre of (detailValue$ | async).genres"
+        >{{genre.name}}
+        </span>
+          <h3
+            class="my-3 fst-italic"
+            *ngIf="(detailValue$ | async).tagline"
+          >
+            {{(detailValue$ | async).tagline}}
+          </h3>
+          <h4>Overview:</h4>
+          <p>{{(detailValue$ | async).overview}}</p>
+          <h4>Common information:</h4>
+          <ul class="list-unstyled">
+            <li class="fw-bold">Original Title:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).originalTitle}}</span>
+            </li>
+            <li class="fw-bold">Original Language:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).originalLanguage | uppercase}}</span>
+            </li>
+            <li class="fw-bold">Status:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).status}}</span>
+            </li>
+            <li class="fw-bold">Release Date:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).releaseDate | date}}</span>
+            </li>
+            <li class="fw-bold">Budget:
+              <span
+                class="fst-italic fw-lighter"
+                *ngIf="(detailValue$ | async).budget !== 0; else unknown"
+              >{{(detailValue$ | async).budget | currency}}</span>
+            </li>
+            <li class="fw-bold">Revenue:
+              <span
+                class="fst-italic fw-lighter"
+                *ngIf="(detailValue$ | async).budget !== 0; else unknown"
+              >{{(detailValue$ | async).revenue | currency}}</span>
+            </li>
+            <li class="fw-bold">Duration:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).runtime}} min</span>
+            </li>
+            <li class="fw-bold">Popularity:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).popularity}}</span>
+            </li>
+            <li class="fw-bold">Vote Count:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).voteCount}}</span>
+            </li>
+            <li class="fw-bold">Vote Average:
+              <span class="fst-italic fw-lighter">{{(detailValue$ | async).voteAverage}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+
+      </div>
+      <div class="row">
+
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="2">
+    Error!
+  </ng-container>
+
+</ng-container>
+
+
+<ng-template #unknown>
+  <span class="fw-lighter">—</span>
+</ng-template>

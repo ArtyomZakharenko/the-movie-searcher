@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import {FormsModule} from "@angular/forms";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -20,12 +21,13 @@ import {FormsModule} from "@angular/forms";
     MovieDetailComponent,
     LoadingSpinnerComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    FontAwesomeModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,9 @@ import {MovieDetail} from "./movie-detail.model";
 import {MovieDetailService} from "./movie-detail.service";
 import {ActivatedRoute} from "@angular/router";
 import {faLink} from "@fortawesome/free-solid-svg-icons";
+import {HttpErrorResponse} from "@angular/common/http";
+import {SimilarMoviesService} from "./similar-movies.service";
+import {RecommendedMoviesService} from "./recommended-movies.service";
 
 @Component({
   selector: 'app-movie-detail',
@@ -19,14 +22,16 @@ export class MovieDetailComponent implements OnInit {
   public detailStatus$: Observable<EntityStatus> = this.movieDetails$.pipe(
     map((entity) => entity.status)
   );
-  public detailError$ = this.movieDetails$.pipe(
+  public detailError$: Observable<HttpErrorResponse> = this.movieDetails$.pipe(
     map((entity) => entity.error)
   );
   public faLink = faLink;
 
   constructor(
     private route: ActivatedRoute,
-    private movieDetailService: MovieDetailService
+    private movieDetailService: MovieDetailService,
+    public similarMoviesService: SimilarMoviesService,
+    public recommendedMoviesService: RecommendedMoviesService
   ) {
   }
 
@@ -34,6 +39,8 @@ export class MovieDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.movieDetailService.fetchMovieDetail(id);
+      this.similarMoviesService.fetchSimilarMovies(id);
+      this.recommendedMoviesService.fetchRecommendedMovies(id);
     });
   }
 }

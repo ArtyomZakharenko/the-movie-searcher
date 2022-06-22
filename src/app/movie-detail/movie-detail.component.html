@@ -28,7 +28,7 @@
           >
         </div>
         <div class="col-12 col-md-6 col-lg-7">
-        <span class="d-inline-block p-2 bg-primary text-white me-1"
+        <span class="d-inline-block p-2 bg-primary text-white m-1"
               *ngFor="let genre of (detailValue$ | async).genres"
         >{{genre.name}}
         </span>
@@ -81,12 +81,19 @@
           </ul>
         </div>
       </div>
-      <div class="row">
-
+      <div class="row mt-3">
+        <app-related-movies
+          [relatedMovies$]="similarMoviesService.getSimilarMovies()"
+          [type]="'Similar'"
+        ></app-related-movies>
       </div>
-      <div class="row">
-
+      <div class="row mt-3">
+        <app-related-movies
+          [relatedMovies$]="recommendedMoviesService.getRecommendedMovies()"
+          [type]="'Recommended'"
+        ></app-related-movies>
       </div>
+
     </div>
   </ng-container>
 

@@ -10,7 +10,7 @@ import {MovieDetailConverter} from "../shared/data.converter";
   {providedIn: 'root'}
 )
 export class MovieDetailService {
-  private MovieDetail = new BehaviorSubject<Entity<MovieDetail>>(null);
+  private movieDetail = new BehaviorSubject<Entity<MovieDetail>>(null);
 
   constructor(
     private http: HttpClient
@@ -19,16 +19,16 @@ export class MovieDetailService {
 
   fetchMovieDetail(id: number): void {
     const url: string = `https://api.themoviedb.org/3/movie/${id}?api_key=${environment.API_KEY}`;
-    this.MovieDetail.next({status: EntityStatus.Pending});
+    this.movieDetail.next({status: EntityStatus.Pending});
     this.http.get<MovieDetailDto>(url).pipe(
       map(data => new MovieDetailConverter(data))
     ).subscribe({
-      next: (value) => this.MovieDetail.next({status: EntityStatus.Success, value}),
-      error: (error) => this.MovieDetail.next({status: EntityStatus.Error, error})
+      next: (value) => this.movieDetail.next({status: EntityStatus.Success, value}),
+      error: (error) => this.movieDetail.next({status: EntityStatus.Error, error})
     });
   }
 
   getMovieDetail(): Observable<Entity<MovieDetail>> {
-    return this.MovieDetail.asObservable();
+    return this.movieDetail.asObservable();
   }
 }

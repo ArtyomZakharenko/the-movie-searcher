@@ -11,6 +11,7 @@ import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import {FormsModule} from "@angular/forms";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {RelatedMoviesComponent} from "./movie-detail/related-movies/related-movies.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     MoviesListComponent,
     MovieCardComponent,
     MovieDetailComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    RelatedMoviesComponent
   ],
   imports: [
     BrowserModule,

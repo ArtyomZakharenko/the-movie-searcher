@@ -1,0 +1,17 @@
+<ng-container [ngSwitch]="(relatedMovies$ | async).status">
+
+  <ng-container *ngSwitchCase="0">
+    <app-loading-spinner></app-loading-spinner>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="1">
+    <ng-container *ngIf="(relatedMovies$ | async).value.results.length > 0">
+      <h3>{{type}} movies:</h3>
+      <div class="d-flex flex-row flex-nowrap gap-2 overflow-y-hidden">
+        <app-movie-card *ngFor="let movie of (relatedMovies$ | async).value.results"
+                        [movie]=movie>
+        </app-movie-card>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>

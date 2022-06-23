@@ -12,6 +12,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import {FormsModule} from "@angular/forms";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {RelatedMoviesComponent} from "./movie-detail/related-movies/related-movies.component";
+import { ErrorMessageComponent } from './shared/error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {RelatedMoviesComponent} from "./movie-detail/related-movies/related-movi
     MovieCardComponent,
     MovieDetailComponent,
     LoadingSpinnerComponent,
-    RelatedMoviesComponent
+    RelatedMoviesComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,

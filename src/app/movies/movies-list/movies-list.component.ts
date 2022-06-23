@@ -4,7 +4,8 @@ import {DataReducerService} from "../../shared/data-reducer.service";
 import {map, Observable, Subscription} from "rxjs";
 import {Movie} from "../models/movie.model";
 import {MovieCollection} from "../models/movie-collection.model";
-import {Entity} from "../../shared/entity.model";
+import {Entity, EntityStatus} from "../../shared/entity.model";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-movies-list',
@@ -13,13 +14,13 @@ import {Entity} from "../../shared/entity.model";
 })
 export class MoviesListComponent implements OnInit{
   private movies$: Observable<Entity<MovieCollection>> = this.dataReducer.getMoviesData();
-  public value$ = this.movies$.pipe(
+  public value$: Observable<MovieCollection> = this.movies$.pipe(
     map((entity) => entity.value)
   );
-  public status$ = this.movies$.pipe(
+  public status$: Observable<EntityStatus> = this.movies$.pipe(
     map((entity) => entity.status)
   );
-  public error$ = this.movies$.pipe(
+  public error$: Observable<HttpErrorResponse> = this.movies$.pipe(
     map((entity) => entity.error)
   );
 

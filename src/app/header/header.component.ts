@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {DataReducerService} from "../shared/data-reducer.service";
 
 @Component({
   selector: 'app-header',
@@ -10,11 +11,11 @@ import {NgForm} from "@angular/forms";
 export class HeaderComponent {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private dataReducerService: DataReducerService
   ) { }
 
   onHome() {
-    console.log('home');
     this.router.navigate(['home']);
   }
 
@@ -23,10 +24,12 @@ export class HeaderComponent {
   }
 
   onSubmit(form: NgForm) {
-    if (!form.valid) {
+    if (!form.valid || !form.value.search.replace(/\s/g, '').length) {
+      form.reset();
       return;
     }
-    this.router.navigate(['search'], {queryParams: {q: form.value.q}});
+    this.router.navigate(['search'], { queryParams: { q: form.value.search, page: "1"} });
+    this.dataReducerService.fetchSearchMovies(form.value.search, 1);
     form.reset();
   }
 }
